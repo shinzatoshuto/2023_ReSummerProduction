@@ -2,36 +2,54 @@
 #include "DxLib.h"
 #include "PadInput.h"
 #include "Image.h"
+#include "BoxCollider.h"
 
 #define MaxSpeed 4.f
-#define MinSpeed 2.f
+#define MinSpeed 2.5f
+
+#define Gravity 1
 
 #define walkTime 60*0.8
 #define runTime 60*0.2
 
 #define Inertia 0.1f
 
-class Player
+#define Player_Width 20
+#define Player_Height 32
+
+class Player: public BoxCollider
 {
 private:
-	float x, y;
+
 	int stageY;
 	int JampY;
-	int JampST;
 	int Stoping;
 	float SpeedL;
 	float SpeedR;
 	int OldKey;
+	bool isPresse;
+	float StrongPower;
+	float JampStop;
+	float oldJamp;
+	int Change;
+	int Switch;
+	int WalkWait;
 
+public:
+	RECT prct;
+	float x, y;
+	float JampPower;
+	float GravityPower;
+	float Sub;
 	bool isJamp;
 	bool isGround;
+	bool isHit;
 
 public:
 	Player();
 	void Update();
 	void PDraw();  //Player(マリオ)の描画
 	void PMove();  //Player(マリオ)の動き
-	void getStage(int y);
 	void Jamp();
 };
 

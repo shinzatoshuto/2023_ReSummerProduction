@@ -3,14 +3,33 @@
 
 GameMain::GameMain()
 {
-	player = new Player();
-	stage = new StageA();
+    player = new Player();
+
+    stage = new StageA();
+	stage->LoadMapdata();
 }
 
 AbsScene* GameMain::Update()
 {
-	player->getStage(stage->maxY);
-	player->Update();
+    for (int i = 0; i < stage->MapData.size(); i++)
+    {
+        for (int j = 0; j < stage->MapData[i].size(); j++)
+        {
+            if (stage->MapData[i][j] == 1)
+            {
+                if (player->HitBox(player->prct, stage->srct[i][j]))
+                {
+                    player->isHit = true;
+                    player->y = stage->srct[i][j].top - 32;
+                }
+            }
+
+        }
+    }
+
+    player->Update();
+
+
 	return this;
 }
 

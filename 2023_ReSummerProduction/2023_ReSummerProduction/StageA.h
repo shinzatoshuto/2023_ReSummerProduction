@@ -1,18 +1,33 @@
 #pragma once
 #include "DxLib.h"
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <cstdio>
+#include <regex>
+#include <iterator>
+#include <list>
+#include <sstream>
+#include <vector>
+#include <stdexcept>
+#include "BoxCollider.h"
 
-class StageA
+#define Map_Size 32
+
+class StageA:public BoxCollider
 {
 public:
-	int maxX, maxY, minX;
+	std::vector<std::vector<int>> MapData;
+	RECT srct[16][220];
 
 public:
 	StageA()
 	{
-		minX = 0;
-		maxX = 640;
-		maxY = 400;
-	}
+
+	};
+	void LoadMapdata();
+	void Update();
 	void DrawStage();
+
 };
 
