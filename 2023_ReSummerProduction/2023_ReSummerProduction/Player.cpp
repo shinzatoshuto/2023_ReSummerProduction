@@ -32,6 +32,7 @@ Player::Player()
     isGround = false;
     isHit = false;
     isPresse = true;
+    isScroll = false;
 }
 
 void Player::Update()
@@ -42,6 +43,11 @@ void Player::Update()
     if (x < 0)  //‰æ–Ê‚ÍŽž‚©‚ço‚È‚¢‚æ‚¤‚É‚·‚é
     {
         x = 0;
+    }
+    if (x > 640 / 2 - 32)
+    {
+        x = 640 / 2 - 32;
+        isScroll = true;
     }
 
     prct.left = x;

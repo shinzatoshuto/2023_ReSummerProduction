@@ -23,12 +23,23 @@ AbsScene* GameMain::Update()
                     player->y = stage->srct[i][j].top - 32;
                 }
             }
+            if (stage->MapData[i][j] == 6)
+            {
+                if (player->HitBox(player->prct, stage->srct[i][j]))
+                {
 
+                }
+            }
         }
     }
 
     player->Update();
 
+    if (player->isScroll && player->SpeedR > 0)
+    {
+        stage->MapScroll(player->SpeedR);
+    }
+    else player->isScroll = false;
 
 	return this;
 }

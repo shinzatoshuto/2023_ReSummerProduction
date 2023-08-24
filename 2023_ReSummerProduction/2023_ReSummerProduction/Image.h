@@ -1,8 +1,6 @@
 #pragma once
 #include "DxLib.h"
 
-
-
 class Image
 {
 public:
@@ -12,7 +10,8 @@ public:
 	static int Floor;       //地面画像
 	static int Mountain[];  //山画像
 	static int Grass[];     //草画像
-	static int Kumo[];
+	static int Kumo[];      //雲画像
+	static int Hatena[];    //ハテナブロック画像
 
 public:
 	static int DrawImages();

@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "StageA.h"
 #include <stdio.h>
-#include "Image.h"
 
 void StageA::LoadMapdata()
 {
@@ -50,90 +49,28 @@ void StageA::Update()
 
 }
 
+void StageA::MapScroll(float pSpeed)
+{
+	x += pSpeed;
+}
+
 void StageA::DrawStage()
 {
 	for (int i = 0; i < MapData.size(); i++)
 	{
 		for (int j = 0; j < MapData[i].size(); j++)
 		{
-			if (MapData[i][j] == 0)  //空の画像表示
+			for (int h = 0; h < sizeof(graph) / sizeof(int); h++)
 			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Sora, TRUE);
-			}
-			if (MapData[i][j] == 1)  //地面の画像表示
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Floor, TRUE);
-			}
-
-			/*********  山の表示  **********/
-			if (MapData[i][j] == 21)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Mountain[0], TRUE);
-			}
-			if (MapData[i][j] == 22)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Mountain[1], TRUE);
-			}
-			if (MapData[i][j] == 23)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Mountain[2], TRUE);
-			}
-			if (MapData[i][j] == 24)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Mountain[3], TRUE);
-			}
-			if (MapData[i][j] == 25)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Mountain[4], TRUE);
-			}
-			if (MapData[i][j] == 26)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Mountain[5], TRUE);
+				if (graph[h][0] == MapData[i][j])
+				{
+					DrawGraph(j * Map_Size - x, i * Map_Size, graph[h][1], TRUE);
+				}
 			}
 
-			/********* 草の画像表示 **********/
-			if (MapData[i][j] == 41)
+			if (MapData[i][j] == 1 || MapData[i][j] == 6)
 			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Grass[0], TRUE);
-			}
-			if (MapData[i][j] == 42)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Grass[1], TRUE);
-			}
-			if (MapData[i][j] == 43)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Grass[2], TRUE);
-			}
-
-			/******* 雲の画像表示 *******/
-			if (MapData[i][j] == 31)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Kumo[0], TRUE);
-			}
-			if (MapData[i][j] == 32)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Kumo[1], TRUE);
-			}
-			if (MapData[i][j] == 33)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Kumo[2], TRUE);
-			}
-			if (MapData[i][j] == 34)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Kumo[3], TRUE);
-			}
-			if (MapData[i][j] == 35)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Kumo[4], TRUE);
-			}
-			if (MapData[i][j] == 36)
-			{
-				DrawGraph(j * Map_Size, i * Map_Size, Image::Kumo[5], TRUE);
-			}
-
-			if (MapData[i][j] == 1)
-			{
-				DrawBox(srct[i][j].left, srct[i][j].top, srct[i][j].right, srct[i][j].bottom, 0xffffff, FALSE);
+				DrawBox(srct[i][j].left - x, srct[i][j].top, srct[i][j].right - x, srct[i][j].bottom, 0xffffff, FALSE);
 			}
 		}
 	}

@@ -24,8 +24,6 @@ private:
 	int stageY;
 	int JampY;
 	int Stoping;
-	float SpeedL;
-	float SpeedR;
 	int OldKey;
 	bool isPresse;
 	float StrongPower;
@@ -36,6 +34,8 @@ private:
 	int WalkWait;
 
 public:
+	float SpeedL;
+	float SpeedR;
 	RECT prct;
 	float x, y;
 	float JampPower;
@@ -44,6 +44,7 @@ public:
 	bool isJamp;
 	bool isGround;
 	bool isHit;
+	bool isScroll;
 
 public:
 	Player();
