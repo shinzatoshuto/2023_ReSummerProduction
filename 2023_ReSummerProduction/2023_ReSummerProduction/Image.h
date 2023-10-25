@@ -12,6 +12,10 @@ public:
 	static int Grass[];     //草画像
 	static int Kumo[];      //雲画像
 	static int Hatena[];    //ハテナブロック画像
+	static int Dokan[];     //土管画像
+	static int Renga;       //レンガブロック画像
+	static int Kaidan;      //階段ブロック画像
+	static int Kara;        //空ブロック画像
 
 public:
 	static int DrawImages();

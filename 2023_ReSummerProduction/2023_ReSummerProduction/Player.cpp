@@ -50,16 +50,16 @@ void Player::Update()
         isScroll = true;
     }
 
+    if (Scrollnum < 0)
+    {
+        Scrollnum = 0;
+    }
+
     prct.left = x;
     prct.right = x + Player_Width;
 
     prct.top = y;
     prct.bottom = y + Player_Height;
-    clsDx();
-    printfDx("JampY %ld\n", JampY);
-    printfDx("by %ld\n", prct.bottom);
-    printfDx("SpeedL %ld\n", SpeedL);
-    printfDx("SpeedR %ld\n", SpeedR);
 }
 
 void Player::PDraw()
@@ -190,8 +190,6 @@ void Player::PDraw()
             DrawGraph(prct.left - 6, prct.top, Image::MarioImg[5], TRUE);
         }
     }
-
-    DrawFormatString(0, 0, 0xffffff, "%d", prct.top);
 }
 
 void Player::PMove()
@@ -238,6 +236,7 @@ void Player::PMove()
         if (OldKey == 1 && SpeedL > 0)
         {
             x -= SpeedL;
+            Scrollnum -= SpeedL;
         }
     }
 
@@ -283,6 +282,7 @@ void Player::PMove()
         if (OldKey == 2 && SpeedR > 0)
         {
             x += SpeedR;
+            Scrollnum += SpeedR;
         }
     }
 
@@ -291,11 +291,13 @@ void Player::PMove()
     //ç∂ï˚å¸
     if (PadInput::flgX != 0 && PadInput::inputX < -MARGIN && SpeedR < MinSpeed) {
         x -= SpeedL;
+        Scrollnum -= SpeedL;
         OldKey = 1;
     }
     //âEï˚å¸
     if (PadInput::flgX != 0 && PadInput::inputX > MARGIN && SpeedL < MinSpeed) {
         x += SpeedR;
+        Scrollnum += SpeedR;
         OldKey = 2;
     }
 }

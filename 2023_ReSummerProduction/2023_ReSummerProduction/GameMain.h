@@ -7,6 +7,9 @@
 class GameMain : public AbsScene
 {
 private:
+	int imgCn;
+	int waitCn;
+	int Count;
 	Player* player;
 	StageA* stage;
 

@@ -1,5 +1,4 @@
 #include "GameMain.h"
-#include "FPS.h"
 
 GameMain::GameMain()
 {
@@ -7,6 +6,9 @@ GameMain::GameMain()
 
     stage = new StageA();
 	stage->LoadMapdata();
+    imgCn = 0;
+    Count = 0;
+    waitCn = 0;
 }
 
 AbsScene* GameMain::Update()
@@ -15,25 +17,35 @@ AbsScene* GameMain::Update()
     {
         for (int j = 0; j < stage->MapData[i].size(); j++)
         {
-            if (stage->MapData[i][j] == 1)
+            RECT rc = { player->Scrollnum,player->prct.top,player->Scrollnum + Player_Width,player->prct.bottom };
+            if (player->HitBox(rc, stage->srct[i][j]))
             {
-                if (player->HitBox(player->prct, stage->srct[i][j]))
+                if (stage->MapData[i][j] == 1)
                 {
                     player->isHit = true;
                     player->y = stage->srct[i][j].top - 32;
                 }
             }
-            if (stage->MapData[i][j] == 6)
-            {
-                if (player->HitBox(player->prct, stage->srct[i][j]))
-                {
+        }
+    }
 
-                }
+
+    player->Update();
+
+    if (Count++ >= 10)
+    {
+        Count = 0;
+        if (waitCn++ > 1)
+        {
+            if (imgCn++ > 2)
+            {
+                waitCn = 0;
+                imgCn = 0;
             }
         }
     }
 
-    player->Update();
+    stage->GetAnimCount(imgCn);
 
     if (player->isScroll && player->SpeedR > 0)
     {
@@ -48,5 +60,4 @@ void GameMain::Draw() const
 {
 	stage->DrawStage();
 	player->PDraw();
-	FPS::Draw();
 }

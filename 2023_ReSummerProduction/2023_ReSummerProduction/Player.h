@@ -45,6 +45,7 @@ public:
 	bool isGround;
 	bool isHit;
 	bool isScroll;
+	float Scrollnum;
 
 public:
 	Player();

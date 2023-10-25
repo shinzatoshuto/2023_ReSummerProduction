@@ -64,7 +64,8 @@ void StageA::DrawStage()
 			{
 				if (graph[h][0] == MapData[i][j])
 				{
-					DrawGraph(j * Map_Size - x, i * Map_Size, graph[h][1], TRUE);
+					if (graph[h][0] == 6)DrawGraph(j * Map_Size - x, i * Map_Size, Image::Hatena[imgCun], TRUE);
+					else DrawGraph(j * Map_Size - x, i * Map_Size, graph[h][1], TRUE);
 				}
 			}
 
